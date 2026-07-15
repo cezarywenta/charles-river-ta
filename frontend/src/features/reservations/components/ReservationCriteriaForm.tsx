@@ -2,6 +2,7 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import type { FieldErrors, UseFormRegister } from 'react-hook-form'
 import type { ReservationFormValues } from '../model/schema'
+import { toDateTimeLocalValue } from '../utils/dateTime'
 
 interface ReservationCriteriaFormProps {
   register: UseFormRegister<ReservationFormValues>
@@ -16,7 +17,7 @@ export function ReservationCriteriaForm({ register, errors, disabled }: Reservat
         label="Start date and time"
         type="datetime-local"
         disabled={disabled}
-        slotProps={{ inputLabel: { shrink: true } }}
+        slotProps={{ inputLabel: { shrink: true }, htmlInput: { min: toDateTimeLocalValue(new Date()) } }}
         error={!!errors.startAt}
         helperText={errors.startAt?.message}
         {...register('startAt')}

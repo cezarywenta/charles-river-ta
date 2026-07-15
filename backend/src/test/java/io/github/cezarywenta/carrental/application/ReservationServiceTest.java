@@ -3,6 +3,7 @@ package io.github.cezarywenta.carrental.application;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.github.cezarywenta.carrental.domain.CarType;
@@ -101,6 +102,26 @@ class ReservationServiceTest {
 
         ReservationResult result =
                 service.reserve(new ReserveCarCommand("customer-2", CarType.SUV, requestedPeriod));
+
+        assertInstanceOf(ReservationResult.ReservationConfirmed.class, result);
+    }
+
+    @Test
+    void reserveRejectsStartInThePast() {
+        ReservationPeriod period = new ReservationPeriod(NOW.minusMinutes(1), NOW.plusDays(1));
+        ReservationService service = service(fleetCapacity(1, 1, 1));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> service.reserve(new ReserveCarCommand("customer-1", CarType.SUV, period)));
+    }
+
+    @Test
+    void reserveAllowsStartExactlyAtNow() {
+        ReservationPeriod period = new ReservationPeriod(NOW, NOW.plusDays(1));
+        ReservationService service = service(fleetCapacity(1, 1, 1));
+
+        ReservationResult result =
+                service.reserve(new ReserveCarCommand("customer-1", CarType.SUV, period));
 
         assertInstanceOf(ReservationResult.ReservationConfirmed.class, result);
     }

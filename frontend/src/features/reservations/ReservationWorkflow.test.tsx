@@ -35,6 +35,12 @@ async function setStartAt(value: string) {
   fireEvent.change(input, { target: { value } })
 }
 
+function pastDateTimeLocalValue(hoursAgo: number): string {
+  const date = new Date(Date.now() - hoursAgo * 3600 * 1000)
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`
+}
+
 describe('ReservationWorkflow', () => {
   it('calculates and displays the return date as criteria change', async () => {
     render(<ReservationWorkflow />)
@@ -43,6 +49,17 @@ describe('ReservationWorkflow', () => {
     await setStartAt('2027-01-10T10:00')
 
     expect(await screen.findByTestId('calculated-return-date')).toHaveTextContent('Jan 11, 2027')
+  })
+
+  it('rejects a start date in the past and never requests availability for it', async () => {
+    render(<ReservationWorkflow />)
+
+    await setStartAt(pastDateTimeLocalValue(2))
+
+    expect(await screen.findByText('Start date must not be in the past')).toBeInTheDocument()
+    await wait(350) // long enough for the debounce to have fired if it was going to
+    expect(screen.queryByTestId('availability-grid')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('availability-loading')).not.toBeInTheDocument()
   })
 
   it('shows a loading indicator while availability is being fetched', async () => {

@@ -4,6 +4,15 @@ export function toApiDateTime(value: string): string {
   return value.length === 16 ? `${value}:00` : value
 }
 
+/** The inverse direction: formats a Date as a `datetime-local` input value
+ * ("2027-01-10T10:00"), used for the input's `min` attribute. Built from
+ * local getters (not toISOString, which is UTC-based) so the string means
+ * the same instant regardless of the browser's time zone. */
+export function toDateTimeLocalValue(date: Date): string {
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`
+}
+
 export function calculateReturnDate(startAt: string, numberOfDays: number): Date | null {
   if (!startAt || !Number.isFinite(numberOfDays) || numberOfDays <= 0) {
     return null

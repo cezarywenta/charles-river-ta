@@ -42,6 +42,7 @@ export function ReservationWorkflow() {
     formState: { errors },
   } = useForm<ReservationFormValues>({
     resolver: zodResolver(reservationRequestSchema),
+    mode: 'onChange',
     defaultValues: DEFAULT_VALUES,
   })
 

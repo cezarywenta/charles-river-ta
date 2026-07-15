@@ -37,6 +37,10 @@ public class ReservationService {
     public ReservationResult reserve(ReserveCarCommand command) {
         Objects.requireNonNull(command, "command must not be null");
 
+        if (command.period().start().isBefore(LocalDateTime.now(clock))) {
+            throw new IllegalArgumentException("startAt must not be in the past");
+        }
+
         return lockManager.executeLocked(command.carType(), () -> {
             List<Reservation> overlapping = repository.findOverlapping(command.carType(), command.period());
             long activeOverlapping = overlapping.stream().filter(Reservation::isActive).count();

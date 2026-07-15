@@ -91,6 +91,17 @@ class ReservationApiTest {
     }
 
     @Test
+    void createReservationReturns400ForStartInThePast() throws Exception {
+        mockMvc.perform(post("/api/reservations")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"carType":"SUV","startAt":"2025-01-01T10:00:00","numberOfDays":2}"""))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.type").value("urn:problem:invalid-request"))
+                .andExpect(jsonPath("$.detail").value("startAt must not be in the past"));
+    }
+
+    @Test
     void createReservationReturns400ForMissingCarType() throws Exception {
         mockMvc.perform(post("/api/reservations")
                         .contentType(MediaType.APPLICATION_JSON)
