@@ -6,7 +6,7 @@ import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { useCurrentUser } from '../context/useCurrentUser'
+import { useCurrentUser } from '../auth/useCurrentUser'
 
 const NAV_ROUTES = ['/reserve', '/reservations'] as const
 

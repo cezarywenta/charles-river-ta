@@ -1,9 +1,9 @@
 import CssBaseline from '@mui/material/CssBaseline'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { AppShell } from './app/AppShell'
-import { CurrentUserProvider } from './context/CurrentUserProvider'
-import { ReservationsPage } from './routes/ReservationsPage'
-import { ReservePage } from './routes/ReservePage'
+import { AppShell } from './AppShell'
+import { CurrentUserProvider } from '../auth/CurrentUserProvider'
+import { ReservationsPage } from '../pages/ReservationsPage'
+import { ReservePage } from '../pages/ReservePage'
 
 function App() {
   return (

@@ -38,5 +38,6 @@ npm run lint
 
 ## Current scope
 
-The repository currently contains the backend and frontend application
-skeletons.
+The repository contains a full-stack solution for the car rental
+technical assessment, including a Spring Boot backend and a React
+frontend.
