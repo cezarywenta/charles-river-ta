@@ -1,18 +1,24 @@
 import CssBaseline from '@mui/material/CssBaseline'
-import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { AppShell } from './app/AppShell'
+import { CurrentUserProvider } from './context/CurrentUserProvider'
+import { ReservationsPage } from './routes/ReservationsPage'
+import { ReservePage } from './routes/ReservePage'
 
 function App() {
   return (
-    <>
+    <CurrentUserProvider>
       <CssBaseline />
-      <Stack spacing={2} sx={{ p: 4 }}>
-        <Typography variant="h4" component="h1">
-          Car Rental
-        </Typography>
-        <Typography color="text.secondary">Frontend skeleton is wired up.</Typography>
-      </Stack>
-    </>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppShell />}>
+            <Route index element={<Navigate to="/reserve" replace />} />
+            <Route path="/reserve" element={<ReservePage />} />
+            <Route path="/reservations" element={<ReservationsPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </CurrentUserProvider>
   )
 }
 
