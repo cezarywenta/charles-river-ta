@@ -1,0 +1,25 @@
+# Operating system
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.iml
+
+# VS Code local files
+.vscode/*
+!.vscode/settings.json
+
+# Java / Maven
+**/target/
+*.log
+
+# Node / Vite
+**/node_modules/
+**/dist/
+**/coverage/
+
+# Environment
+.env
+.env.*
+!.env.example
