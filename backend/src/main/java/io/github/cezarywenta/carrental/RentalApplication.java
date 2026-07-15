@@ -1,4 +1,4 @@
-package com.example.rental;
+package io.github.cezarywenta.carrental;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

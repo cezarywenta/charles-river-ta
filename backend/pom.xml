@@ -8,11 +8,11 @@
 		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>rental</artifactId>
+	<groupId>io.github.cezarywenta</groupId>
+	<artifactId>car-rental-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RentalApplication</name>
-	<description>Car rental reservation demo — Charles River technical assessment</description>
+	<name>car-rental-backend</name>
+	<description>Simulated car rental reservation system</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>

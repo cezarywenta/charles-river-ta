@@ -1,4 +1,4 @@
-package com.example.rental;
+package io.github.cezarywenta.carrental;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
