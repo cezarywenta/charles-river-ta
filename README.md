@@ -39,5 +39,4 @@ npm run lint
 ## Current scope
 
 The repository currently contains the backend and frontend application
-skeletons. Domain logic, API endpoints and user flows will be added
-incrementally.
+skeletons.
