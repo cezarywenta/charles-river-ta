@@ -27,7 +27,7 @@ class ReservationServiceTest {
     }
 
     private ReservationService service(FleetCapacity fleetCapacity) {
-        return new ReservationService(repository, fleetCapacity, FIXED_CLOCK);
+        return new ReservationService(repository, fleetCapacity, new FakeLockManager(), FIXED_CLOCK);
     }
 
     private Reservation seedConfirmed(CarType carType, ReservationPeriod period, String customerId) {
